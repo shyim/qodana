@@ -33,7 +33,6 @@ jobs:
         run: |
           mkdir out
           docker run --rm -v $(pwd)/project/:/data/project/ -v $(pwd)/out/:/tmp/report -v "$(pwd)/plugins/PHP Annotations:/opt/idea/plugins/PHP Annotations" -v "$(pwd)/plugins/Symfony Support:/opt/idea/plugins/Symfony Support" -v "$(pwd)/plugins/shopware6-phpstorm-plugin:/opt/idea/plugins/shopware6-phpstorm-plugin" -v "$(pwd)/plugins/PhpInspectionsEA.jar:/opt/idea/plugins/PhpInspectionsEA.jar" jetbrains/qodana-php --save-report --report-dir=/tmp/report
-          sudo rm out/log/idea*.log
           
       - name: Deploy
         run: rsync -avze ssh --delete ./out/ opc@qodana.fos.gg:/home/opc/qodana/web/platform
