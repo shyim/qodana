@@ -5,12 +5,21 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - repo: shopware/platform
+            name: sw6
+          - repo: shopware/shopware
+            name: sw5
+          - repo: shyim/danger-php
+            name: danger-php
     steps:
       - name: Checkout
         uses: actions/checkout@v2.4.0
     
       - name: Clone
-        run: git clone https://github.com/shopware/platform.git project
+        run: git clone https://github.com/${{ matrix.repo }}.git project
         
       - name: Setup PHP with composer v2
         uses: shivammathur/setup-php@v2
@@ -19,7 +28,9 @@ jobs:
           tools: composer:v2
           
       - name: Install Composer
-        run: composer install --no-scripts -n -d project
+        run: |
+          composer install --no-scripts -n -d project
+          rm -rf project/src/Recovery project/.danger.php project/.bc-exclude.php project/easy-coding-standard.php  project/ecs.php project/vendor-bin
         
       - name: Setup Deploy key
         uses: webfactory/ssh-agent@v0.5.4
@@ -28,11 +39,11 @@ jobs:
           
       - name: Setup known hosts
         run: ssh-keyscan -H qodana.fos.gg > ~/.ssh/known_hosts
-
+        
       - name: Run Qodana
         run: |
           mkdir out
           docker run --rm -v $(pwd)/project/:/data/project/ -v $(pwd)/out/:/tmp/report -v "$(pwd)/plugins/PHP Annotations:/opt/idea/plugins/PHP Annotations" -v "$(pwd)/plugins/Symfony Support:/opt/idea/plugins/Symfony Support" -v "$(pwd)/plugins/shopware6-phpstorm-plugin:/opt/idea/plugins/shopware6-phpstorm-plugin" -v "$(pwd)/plugins/PhpInspectionsEA.jar:/opt/idea/plugins/PhpInspectionsEA.jar" jetbrains/qodana-php --save-report --report-dir=/tmp/report
           
       - name: Deploy
-        run: rsync -avze ssh --delete ./out/ opc@qodana.fos.gg:/home/opc/qodana/web/platform
+        run: rsync -avze ssh --delete ${{ runner.temp }}/qodana/results/report/ opc@qodana.fos.gg:/home/opc/qodana/web/${{ matrix.name }}
