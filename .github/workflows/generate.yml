@@ -33,6 +33,8 @@ jobs:
         run: |
           composer install --no-scripts -n -d project
           rm -rf project/src/Recovery project/.danger.php project/.bc-exclude.php project/easy-coding-standard.php  project/ecs.php project/vendor-bin project/recovery
+          ./project/bin/console || true
+          cp -R default/* project/
         
       - name: Setup Deploy key
         uses: webfactory/ssh-agent@v0.5.4
