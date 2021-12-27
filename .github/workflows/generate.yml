@@ -5,6 +5,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    name: ${{ matrix.name }}
+    continue-on-error: true
     strategy:
       matrix:
         include:
@@ -46,4 +48,4 @@ jobs:
           docker run --rm -v $(pwd)/project/:/data/project/ -v $(pwd)/out/:/tmp/report -v "$(pwd)/plugins/PHP Annotations:/opt/idea/plugins/PHP Annotations" -v "$(pwd)/plugins/Symfony Support:/opt/idea/plugins/Symfony Support" -v "$(pwd)/plugins/shopware6-phpstorm-plugin:/opt/idea/plugins/shopware6-phpstorm-plugin" -v "$(pwd)/plugins/PhpInspectionsEA.jar:/opt/idea/plugins/PhpInspectionsEA.jar" jetbrains/qodana-php --save-report --report-dir=/tmp/report
           
       - name: Deploy
-        run: rsync -avze ssh --delete ${{ runner.temp }}/qodana/results/report/ opc@qodana.fos.gg:/home/opc/qodana/web/${{ matrix.name }}
+        run: rsync -avze ssh --delete ./out/ opc@qodana.fos.gg:/home/opc/qodana/web/${{ matrix.name }}
