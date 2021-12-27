@@ -16,7 +16,15 @@ jobs:
           tools: composer:v2
           
       - name: Install Composer
-        run: composer install --no-scripts -n 
+        run: composer install --no-scripts -n
+        
+      - name: Setup Deploy key
+        uses: webfactory/ssh-agent@v0.5.4
+        with:
+          ssh-private-key: ${{ secrets.DEPLOY_KEY }}
+          
+      - name: Setup known hosts
+        run: ssh-keyscan -H qodana.fos.gg > ~/.ssh/known_hosts
 
       - name: Run Qodana
         run: |
