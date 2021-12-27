@@ -30,11 +30,7 @@ jobs:
         run: |
           mkdir out
           docker run --rm -v $(pwd)/platform/:/data/project/ -v $(pwd)/out/:/data/results/ jetbrains/qodana-php
-          rm out/log/idea*.log
+          sudo rm out/log/idea*.log
           
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        if: ${{ github.ref == 'refs/heads/main' }}
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out
+        run: rsync -avze ssh --delete ./out/ opc@qodana.fos.gg:/home/opc/qodana/web/platform
