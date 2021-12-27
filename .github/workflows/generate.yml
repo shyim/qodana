@@ -17,6 +17,7 @@ jobs:
         run: |
           mkdir out
           docker run --rm -v $(pwd)/platform/:/data/project/ -v $(pwd)/out/:/data/results/ jetbrains/qodana-php
+          rm out/log/idea*.log
           
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
