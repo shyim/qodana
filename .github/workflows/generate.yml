@@ -47,11 +47,8 @@ jobs:
       - name: Setup known hosts
         run: ssh-keyscan -H qodana.fos.gg > ~/.ssh/known_hosts
         
-      - run: pwd
-      - run: ls -la /home/runner/work/qodana/qodana/plugins/SymfonySupport
-        
       - name: Run Qodana
-        uses: shyim/qodana-action@main
+        uses: jetbrains/qodana-action@4.2.0
         with:
           linter: jetbrains/qodana-php:latest
           project-dir: ${{ github.workspace }}/project
