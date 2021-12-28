@@ -46,12 +46,12 @@ jobs:
         run: ssh-keyscan -H qodana.fos.gg > ~/.ssh/known_hosts
         
       - run: pwd
-      - run: ls -la
+      - run: ls -la /home/runner/work/qodana/qodana/plugins/SymfonySupport
         
       - name: Run Qodana
         uses: shyim/qodana-action@main
         with:
-          linter: jetbrains/qodana-php
+          linter: jetbrains/qodana-php:latest
           upload-result: false
           additional-cache-hash: ${{ matrix.repo }}
           use-annotations: false
