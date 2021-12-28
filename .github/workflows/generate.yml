@@ -16,6 +16,8 @@ jobs:
             name: sw5
           - repo: shyim/danger-php
             name: danger-php
+          - repo: FriendsOfShopware/FroshPluginUploader
+            name: FroshPluginUploader
     steps:
       - name: Checkout
         uses: actions/checkout@v2.4.0
