@@ -15,3 +15,4 @@ exclude:
   - name: LanguageDetectionInspection
   - name: PhpDocMissingThrowsInspection
   - name: DynamicInvocationViaScopeResolutionInspection
+  - name: PhpPureAttributeCanBeAddedInspection
