@@ -48,7 +48,7 @@ jobs:
         run: ssh-keyscan -H qodana.fos.gg > ~/.ssh/known_hosts
         
       - name: Run Qodana
-        uses: jetbrains/qodana-action@4.2.0
+        uses: jetbrains/qodana-action@v4.2.0
         with:
           linter: jetbrains/qodana-php:latest
           project-dir: ${{ github.workspace }}/project
