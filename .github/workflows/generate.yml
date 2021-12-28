@@ -56,10 +56,10 @@ jobs:
           additional-cache-hash: ${{ matrix.repo }}
           use-annotations: false
           additional-volumes: |
-            "${{ github.workspace }}/plugins/PHPAnnotations:/opt/idea/plugins/PHPAnnotations"
-            "${{ github.workspace }}/plugins/SymfonySupport:/opt/idea/plugins/SymfonySupport"
-            "${{ github.workspace }}/plugins/shopware6-phpstorm-plugin:/opt/idea/plugins/shopware6-phpstorm-plugin"
-            "${{ github.workspace }}/plugins/PhpInspectionsEA.jar:/opt/idea/plugins/PhpInspectionsEA.jar"
+            ${{ github.workspace }}/plugins/PHPAnnotations:/opt/idea/plugins/PHPAnnotations
+            ${{ github.workspace }}/plugins/SymfonySupport:/opt/idea/plugins/SymfonySupport
+            ${{ github.workspace }}/plugins/shopware6-phpstorm-plugin:/opt/idea/plugins/shopware6-phpstorm-plugin
+            ${{ github.workspace }}/plugins/PhpInspectionsEA.jar:/opt/idea/plugins/PhpInspectionsEA.jar
         
       - name: Deploy
         run: rsync -avze ssh --delete ${{ runner.temp }}/qodana/results/report/ opc@qodana.fos.gg:/home/opc/qodana/web/${{ matrix.name }}
