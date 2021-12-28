@@ -56,8 +56,8 @@ jobs:
           additional-cache-hash: ${{ matrix.repo }}
           use-annotations: false
           additional-volumes: |
-            "${{ github.workspace }}/plugins/PHP Annotations:/opt/idea/plugins/PHP Annotations"
-            "${{ github.workspace }}/plugins/Symfony Support:/opt/idea/plugins/Symfony Support"
+            "${{ github.workspace }}/plugins/PHPAnnotations:/opt/idea/plugins/PHPAnnotations"
+            "${{ github.workspace }}/plugins/SymfonySupport:/opt/idea/plugins/SymfonySupport"
             "${{ github.workspace }}/plugins/shopware6-phpstorm-plugin:/opt/idea/plugins/shopware6-phpstorm-plugin"
             "${{ github.workspace }}/plugins/PhpInspectionsEA.jar:/opt/idea/plugins/PhpInspectionsEA.jar"
         
