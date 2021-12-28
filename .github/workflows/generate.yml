@@ -45,6 +45,9 @@ jobs:
       - name: Setup known hosts
         run: ssh-keyscan -H qodana.fos.gg > ~/.ssh/known_hosts
         
+      - run: pwd
+      - run: ls -la
+        
       - name: Run Qodana
         uses: shyim/qodana-action@main
         with:
@@ -53,10 +56,10 @@ jobs:
           additional-cache-hash: ${{ matrix.repo }}
           use-annotations: false
           additional-volumes: |
-            ${{ github.workspace }}/plugins/PHP Annotations:/opt/idea/plugins/PHP Annotations
-            ${{ github.workspace }}/plugins/Symfony Support:/opt/idea/plugins/Symfony Support
-            ${{ github.workspace }}/plugins/shopware6-phpstorm-plugin:/opt/idea/plugins/shopware6-phpstorm-plugin
-            ${{ github.workspace }}/plugins/PhpInspectionsEA.jar:/opt/idea/plugins/PhpInspectionsEA.jar
+            "${{ github.workspace }}/plugins/PHP Annotations:/opt/idea/plugins/PHP Annotations"
+            "${{ github.workspace }}/plugins/Symfony Support:/opt/idea/plugins/Symfony Support"
+            "${{ github.workspace }}/plugins/shopware6-phpstorm-plugin:/opt/idea/plugins/shopware6-phpstorm-plugin"
+            "${{ github.workspace }}/plugins/PhpInspectionsEA.jar:/opt/idea/plugins/PhpInspectionsEA.jar"
         
       - name: Deploy
         run: rsync -avze ssh --delete ${{ runner.temp }}/qodana/results/report/ opc@qodana.fos.gg:/home/opc/qodana/web/${{ matrix.name }}
