@@ -52,6 +52,7 @@ jobs:
         uses: shyim/qodana-action@main
         with:
           linter: jetbrains/qodana-php:latest
+          project-dir: ${{ github.workspace }}/project
           upload-result: false
           additional-cache-hash: ${{ matrix.repo }}
           use-annotations: false
