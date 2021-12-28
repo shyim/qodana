@@ -6,6 +6,11 @@ exclude:
       - changelog
       - var
       - vendor
+      - engine/Library/Smarty
+      - engine/Library/Zend
+      - engine/Library/ExtJs
+      - src/Docs
   - name: SpellCheckingInspection
   - name: GrazieInspection
   - name: LanguageDetectionInspection
+  - name: PhpDocMissingThrowsInspection
