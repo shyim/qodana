@@ -10,9 +10,3 @@ exclude:
       - engine/Library/Zend
       - engine/Library/ExtJs
       - src/Docs
-  - name: SpellCheckingInspection
-  - name: GrazieInspection
-  - name: LanguageDetectionInspection
-  - name: PhpDocMissingThrowsInspection
-  - name: DynamicInvocationViaScopeResolutionInspection
-  - name: PhpPureAttributeCanBeAddedInspection
