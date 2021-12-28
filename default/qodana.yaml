@@ -3,5 +3,9 @@ profile:
 exclude:
   - name: All
     paths:
+      - changelog
+      - var
       - vendor
   - name: SpellCheckingInspection
+  - name: GrazieInspection
+  - name: LanguageDetectionInspection
