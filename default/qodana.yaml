@@ -1,5 +1,5 @@
 profile:
-    path: profile.xml
+    path: .qodana-profile.xml
 exclude:
   - name: All
     paths:
