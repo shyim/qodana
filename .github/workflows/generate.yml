@@ -36,7 +36,6 @@ jobs:
           composer install --no-scripts -n -d project
           rm -rf project/src/Recovery project/.danger.php project/.bc-exclude.php project/easy-coding-standard.php  project/ecs.php project/vendor-bin project/recovery
           ./project/bin/console || true
-          cp -R default/.idea project/
           cp -R default/* project/
         
       - name: Setup Deploy key
@@ -50,16 +49,11 @@ jobs:
       - name: Run Qodana
         uses: jetbrains/qodana-action@v4.2.0
         with:
-          linter: jetbrains/qodana-php:latest
+          linter: ghcr.io/shyim/qodana-php:latest
           project-dir: ${{ github.workspace }}/project
           upload-result: false
           additional-cache-hash: ${{ matrix.repo }}
           use-annotations: false
-          additional-volumes: |
-            ${{ github.workspace }}/plugins/PHPAnnotations:/opt/idea/plugins/PHPAnnotations
-            ${{ github.workspace }}/plugins/SymfonySupport:/opt/idea/plugins/SymfonySupport
-            ${{ github.workspace }}/plugins/shopware6-phpstorm-plugin:/opt/idea/plugins/shopware6-phpstorm-plugin
-            ${{ github.workspace }}/plugins/PhpInspectionsEA.jar:/opt/idea/plugins/PhpInspectionsEA.jar
         
       - name: Deploy
         run: rsync -avze ssh --delete ${{ runner.temp }}/qodana/results/report/ opc@qodana.fos.gg:/home/opc/qodana/web/${{ matrix.name }}
