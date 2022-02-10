@@ -58,8 +58,6 @@ jobs:
           upload-result: false
           additional-cache-hash: ${{ matrix.repo }}
           use-annotations: false
-          properties:
-            idea.log.config.file : info.xml
         
       - name: Deploy
         run: rsync -avze ssh --delete ${{ runner.temp }}/qodana/results/report/ opc@qodana.fos.gg:/home/opc/qodana/web/${{ matrix.name }}
