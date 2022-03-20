@@ -48,7 +48,7 @@ jobs:
           ssh-private-key: ${{ secrets.DEPLOY_KEY }}
           
       - name: Setup known hosts
-        run: ssh-keyscan -H qodana.fos.gg > ~/.ssh/known_hosts
+        run: ssh-keyscan -H aelia.shyim.de > ~/.ssh/known_hosts
         
       - name: Run Qodana
         uses: jetbrains/qodana-action@v4.2.5
