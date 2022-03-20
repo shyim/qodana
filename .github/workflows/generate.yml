@@ -60,4 +60,4 @@ jobs:
           use-annotations: false
         
       - name: Deploy
-        run: rsync -avze ssh --delete ${{ runner.temp }}/qodana/results/report/ opc@qodana.fos.gg:/home/opc/qodana/web/${{ matrix.name }}
+        run: rsync -avze ssh --delete ${{ runner.temp }}/qodana/results/report/ qodana@aelia.shyim.de:/home/qodana/web/${{ matrix.name }}
