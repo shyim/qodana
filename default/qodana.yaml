@@ -10,5 +10,3 @@ exclude:
       - engine/Library/Zend
       - engine/Library/ExtJs
       - src/Docs
-properties:
-  idea.log.config.file : info.xml
