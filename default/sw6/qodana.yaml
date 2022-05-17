@@ -1,0 +1,19 @@
+profile:
+    path: .qodana-profile.xml
+exclude:
+  - name: CssUnusedSymbol
+  - name: All
+    paths:
+      - changelog
+      - var
+      - vendor
+      - src/Docs
+      - src/Recovery
+inspections:
+  LicenseAudit:
+    paths:
+      - "."
+      - "src/Recovery/Common"
+      - "src/Administration/Resources/app/administration"
+      - "src/Storefront/Resources/app/storefront"
+      - "tests/e2e"

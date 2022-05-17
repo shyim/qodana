@@ -36,6 +36,8 @@ jobs:
           tools: composer:v2
           
       - name: Install Composer
+        env:
+          PROJECT_NAME: '${{ matrix.repo }}'
         run: |
           composer install --no-scripts -n -d project
           rm -rf project/src/Recovery project/.danger.php project/.bc-exclude.php project/easy-coding-standard.php  project/ecs.php project/vendor-bin project/recovery
